@@ -13,6 +13,7 @@ public class Logic {
 
     }
 
+
     //has at least one 0 in non-leading digits
     public boolean isDuck(long number) {
         String stringNum = String.valueOf(number);
@@ -126,41 +127,10 @@ public class Logic {
 
     public String getProperties(long number) {
         StringBuilder str = new StringBuilder();
-        if (isBuzz(number)) {
-            str.append(" buzz,");
-        }
-        if (isDuck(number)) {
-            str.append(" duck,");
-        }
-        if (isPalindrome(number)) {
-            str.append(" palindromic,");
-        }
-        if (isGapful(number)) {
-            str.append(" gapful,");
-        }
-        if (isSpy(number)) {
-            str.append(" spy,");
-        }
-        if (isSquare(number)) {
-            str.append(" square,");
-        }
-        if (isSunny(number)) {
-            str.append(" sunny,");
-        }
-        if (isJumping(number)) {
-            str.append(" jumping,");
-        }
-        if (isHappy(number)) {
-            str.append(" happy,");
-        }
-        if (isSad(number)) {
-            str.append(" sad,");
-        }
-        if (isEven(number)) {
-            str.append(" even,");
-        }
-        if (isOdd(number)) {
-            str.append(" odd,");
+        for (PropertiesOfNumbers c :PropertiesOfNumbers.values()) {
+            if (c.checkProperty(number)) {
+                str.append(" ").append(c.name().toLowerCase()).append(",");
+            }
         }
         return str.deleteCharAt(str.length() - 1).toString();
     }
@@ -191,156 +161,16 @@ public class Logic {
     }
 
     public boolean containsProperties(long number, ArrayList<String> properties) {
-        int count = 0;
-        for (String property : properties) {
-            switch (property) {
-                case "BUZZ":
-                    if (isBuzz(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "DUCK":
-                    if (isDuck(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "PALINDROMIC":
-                    if (isPalindrome(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "GAPFUL":
-                    if (isGapful(number)) {
-                        count++;
-                    }
-
-                    break;
-
-                case "SPY":
-                    if (isSpy(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "SQUARE":
-                    if (isSquare(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "SUNNY":
-                    if (isSunny(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "JUMPING":
-                    if (isJumping(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "HAPPY":
-                    if (isHappy(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "SAD":
-                    if (isSad(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "EVEN":
-                    if (isEven(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "ODD":
-                    if (isOdd(number)) {
-                        count++;
-                    }
-                    break;
-                case "-BUZZ":
-                    if (!isBuzz(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-DUCK":
-                    if (!isDuck(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-PALINDROMIC":
-                    if (!isPalindrome(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-GAPFUL":
-                    if (!isGapful(number)) {
-                        count++;
-                    }
-
-                    break;
-
-                case "-SPY":
-                    if (!isSpy(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-SQUARE":
-                    if (!isSquare(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-SUNNY":
-                    if (!isSunny(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-JUMPING":
-                    if (!isJumping(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-HAPPY":
-                    if (!isHappy(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-SAD":
-                    if (!isSad(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-EVEN":
-                    if (!isEven(number)) {
-                        count++;
-                    }
-                    break;
-
-                case "-ODD":
-                    if (!isOdd(number)) {
-                        count++;
-                    }
-                    break;
+        int count = properties.size();
+        for (PropertiesOfNumbers c :PropertiesOfNumbers.values()) {
+            if (properties.contains(c.name()) && c.checkProperty(number)) {
+                count--;
             }
-
+            if (properties.contains("-" + c.name()) && !c.checkProperty(number)) {
+                count--;
+            }
         }
-        return count == properties.size();
+
+        return count == 0;
     }
 }

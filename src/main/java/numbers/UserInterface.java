@@ -2,8 +2,9 @@ package numbers;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Locale;
 import java.util.Scanner;
-import java.util.stream.Collectors;
+
 
 public class UserInterface {
     private final Scanner scanner;
@@ -138,7 +139,6 @@ public class UserInterface {
                     counter++;
                 }
             }
-
         }
         return properties.size() - counter;
     }
@@ -149,26 +149,16 @@ public class UserInterface {
     }
 
     public void printOneNum() {
-        String form = String.format("%,d", firstNum);
+        String form = String.format(Locale.US, "%,d", firstNum);
         System.out.println("Properties of " + form);
-        System.out.println("        buzz: " + logic.isBuzz(firstNum));
-        System.out.println("        duck: " + logic.isDuck(firstNum));
-        System.out.println(" palindromic: " + logic.isPalindrome(firstNum));
-        System.out.println("      gapful: " + logic.isGapful(firstNum));
-        System.out.println("         spy: " + logic.isSpy(firstNum));
-        System.out.println("      square: " + logic.isSquare(firstNum));
-        System.out.println("       sunny: " + logic.isSunny(firstNum));
-        System.out.println("     jumping: " + logic.isJumping(firstNum));
-        System.out.println("       happy: " + logic.isHappy(firstNum));
-        System.out.println("         sad: " + logic.isSad(firstNum));
-        System.out.println("        even: " + logic.isEven(firstNum));
-        System.out.println("         odd: " + logic.isOdd(firstNum));
-        System.out.println("");
+        for (PropertiesOfNumbers c :PropertiesOfNumbers.values()) {
+            System.out.printf("%12s: %b\n", c.name().toLowerCase(), c.checkProperty(firstNum));
+        }
     }
 
     public void printMultipleNums(long times) {
         for (int i = 0; i < times; i++) {
-            System.out.format("%16d", (firstNum + i));
+            System.out.format(Locale.US, "%,16d", (firstNum + i));
             System.out.println(" is" + logic.getProperties(firstNum + i));
         }
         System.out.println("");

@@ -1,24 +1,88 @@
 package numbers;
 
 public enum PropertiesOfNumbers {
-    BUZZ("-BUZZ", "", ""),
-    DUCK("-DUCK", "SPY", ""),
-    PALINDROMIC("-PALINDROMIC", "", ""),
-    GAPFUL("-GAPFUL", "", ""),
-    SPY("-SPY", "DUCK", ""),
-    SQUARE("-SQUARE", "SUNNY", ""),
-    SUNNY("-SUNNY", "SQUARE", ""),
-    JUMPING("-JUMPING", "", ""),
-    HAPPY("-HAPPY", "SAD", "-SADenum"),
-    SAD("-SAD", "HAPPY", "-HAPPY"),
-    EVEN("-EVEN", "ODD", "-ODD"),
-    ODD("-ODD", "EVEN", "-EVEN");
+    BUZZ("-BUZZ","",""){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isBuzz(number);
+        }
+    },
+    DUCK("-DUCK", "SPY", ""){
+        @Override
+        public boolean checkProperty(long number) {
+            return  logic.isDuck(number);
+        }
+    },
+    PALINDROMIC("-PALINDROMIC", "", ""){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isPalindrome(number);
+        }
+    },
+    GAPFUL("-GAPFUL", "", ""){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isGapful(number);
+        }
+    },
+    SPY("-SPY", "DUCK", ""){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isSpy(number);
+        }
+    },
+    SQUARE("-SQUARE", "SUNNY", ""){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isSquare(number);
+        }
+    },
+    SUNNY("-SUNNY", "SQUARE", ""){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isSunny(number);
+        }
+    },
+    JUMPING("-JUMPING", "", ""){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isJumping(number);
+        }
+    },
+    HAPPY("-HAPPY", "SAD", "-SAD"){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isHappy(number);
+        }
+    },
+    SAD("-SAD", "HAPPY", "-HAPPY"){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isSad(number);
+        }
+    },
+    EVEN("-EVEN", "ODD", "-ODD"){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isEven(number);
+        }
+    },
+    ODD("-ODD", "EVEN", "-EVEN"){
+        @Override
+        public boolean checkProperty(long number) {
+            return logic.isOdd(number);
+        }
+    };
 
 
 
     private final String opposite;
     private final String exclusive;
     private final String oppositeExclusive;
+    public abstract boolean checkProperty(long number);
+    public static final Logic logic = new Logic();
+
+
 
     PropertiesOfNumbers(String opposite, String exclusive, String oppositeExclusive) {
         this.opposite = opposite;
@@ -37,4 +101,6 @@ public enum PropertiesOfNumbers {
     public String getOppositeExclusive() {
         return oppositeExclusive;
     }
+
+
 }
