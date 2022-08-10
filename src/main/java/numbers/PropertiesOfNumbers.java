@@ -1,5 +1,8 @@
 package numbers;
 
+/**
+ * Enums with all their respective properties, checks and exclusive properties
+ */
 public enum PropertiesOfNumbers {
     BUZZ("-BUZZ","",""){
         @Override

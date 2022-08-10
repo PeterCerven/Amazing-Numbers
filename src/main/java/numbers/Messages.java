@@ -2,6 +2,9 @@ package numbers;
 
 import java.util.ArrayList;
 
+/**
+ * Class that stores messages and warnings
+ */
 public class Messages {
     Logic logic;
 
@@ -14,10 +17,16 @@ public class Messages {
                 " JUMPING, HAPPY, SAD]\n");
     }
 
+    /**
+     * First parameter is not a natural number
+     */
     public void errorFirstParameter() {
         System.out.println("The first parameter should be a natural number or zero.");
     }
 
+    /**
+     * Second parameter is not a natural number
+     */
     public void errorSecondParameter() {
         System.out.println("The second parameter should be a natural number.");
     }
@@ -41,6 +50,11 @@ public class Messages {
         System.out.println("There are no numbers with these properties.\n");
     }
 
+    /**
+     * List of wrong properties
+     * @param properties parameters as properties
+     * @param num number of wrong properties
+     */
     public void errorWrongProperties(ArrayList<String> properties, int num) {
         StringBuilder str = new StringBuilder();
         if (num == 1) {

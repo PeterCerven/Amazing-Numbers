@@ -5,7 +5,9 @@ import java.util.Arrays;
 import java.util.Locale;
 import java.util.Scanner;
 
-
+/**
+ * Class for entering request and getting output
+ */
 public class UserInterface {
     private final Scanner scanner;
     private long firstNum;
@@ -114,7 +116,12 @@ public class UserInterface {
         printMultipleNumsWithProperties(secondNum, parameters);
     }
 
-
+    /**
+     * Prints numbers that many times as is specified with all the properties that the number must have starting
+     * from the given number
+     * @param times how many numbers to print
+     * @param properties all the properties that need to be present in the number
+     */
     private void printMultipleNumsWithProperties(long times, ArrayList<String> properties) {
         int count = 0;
         long currentNum = firstNum;
@@ -130,6 +137,12 @@ public class UserInterface {
         System.out.println("");
     }
 
+
+    /**
+     * Check if the properties are valid
+     * @param properties list parameters that are checked
+     * @return number of wrong properties
+     */
     private int validProperties(ArrayList<String> properties) {
         int counter = 0;
 
@@ -148,6 +161,9 @@ public class UserInterface {
         return num >= 0;
     }
 
+    /**
+     * Prints one number and all the properties and if they are present in the number
+     */
     public void printOneNum() {
         String form = String.format(Locale.US, "%,d", firstNum);
         System.out.println("Properties of " + form);
@@ -156,6 +172,9 @@ public class UserInterface {
         }
     }
 
+    /**
+     * Prints multiple numbers and all the properties and if they are present in the number
+     */
     public void printMultipleNums(long times) {
         for (int i = 0; i < times; i++) {
             System.out.format(Locale.US, "%,16d", (firstNum + i));

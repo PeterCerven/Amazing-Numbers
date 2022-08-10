@@ -2,9 +2,16 @@ package numbers;
 
 import java.util.ArrayList;
 
+/**
+ * Class Logic
+ */
 public class Logic {
 
-    //divisible by 7 or ends with 7
+    /**
+     * Buzz number - is divisible by 7 or ends with 7
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isBuzz(long number) {
         boolean divisible7 = number % 7 == 0;
         boolean endsWith7 = number % 10 == 7;
@@ -14,12 +21,21 @@ public class Logic {
     }
 
 
-    //has at least one 0 in non-leading digits
+    /**
+     * Duck number - has at least one 0 in non-leading digits
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isDuck(long number) {
         String stringNum = String.valueOf(number);
         return stringNum.contains("0") && !stringNum.startsWith("0");
     }
 
+    /**
+     * Palindrome number
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isPalindrome(long number) {
         String stringNum = String.valueOf(number);
         int size = stringNum.length();
@@ -31,7 +47,12 @@ public class Logic {
         return true;
     }
 
-    //Number of digits must be 3+ and first and last digit concatenated must divide number with no remainder
+
+    /**
+     * Gapful number - Number of digits must be 3+ and first and last digit concatenated must divide number with no remainder
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isGapful(long number) {
         String stringNum = String.valueOf(number);
         if (stringNum.length() < 3) {
@@ -50,7 +71,12 @@ public class Logic {
         return number % 2 == 1;
     }
 
-    //sum of all digits is equal to the product of all digits
+
+    /**
+     * Spy number - sum of all digits is equal to the product of all digits
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isSpy(long number) {
         int sum = 0;
         int product = 1;
@@ -66,11 +92,21 @@ public class Logic {
         return sum == product;
     }
 
-    //N is sunny if N + 1 is perfect square -> can be root is whole number
+
+    /**
+     * Sunny number - is sunny if N + 1 is perfect square -> can be root is whole number
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isSunny(long number) {
         return isSquare(number + 1);
     }
 
+    /**
+     * Check if we can parse number to Double
+     * @param str parameter in string from
+     * @return boolean if the number is numeric
+     */
     public boolean isNumeric(String str) {
         try {
             Double.parseDouble(str);
@@ -80,12 +116,22 @@ public class Logic {
         }
     }
 
+    /**
+     * Square number - Number is perfect square -> can be root is whole number
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isSquare(long number) {
         double sqrt = Math.round(Math.sqrt(number));
         return sqrt * sqrt == number;
     }
 
-    //adjacent digit inside the number differ by 1
+
+    /**
+     * Jumping number - adjacent digit inside the number differ by 1
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isJumping(long number) {
         String[] digits = String.valueOf(number).split("");
         if (digits.length == 1) {
@@ -100,6 +146,11 @@ public class Logic {
         return true;
     }
 
+    /**
+     * Happy number - is a number which eventually reaches 1 when replaced by the sum of the square of each digit
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isHappy(long number) {
         ArrayList<Long> existed = new ArrayList<>();
         existed.add(1L);
@@ -120,11 +171,21 @@ public class Logic {
         return sum == 1;
     }
 
+    /**
+     * Sad number - is a number which won't reach 1 when replaced by the sum of the square of each digit
+     * @param number long type
+     * @return if the number has the property
+     */
     public boolean isSad(long number) {
         return !isHappy(number);
     }
 
 
+    /**
+     * Creates string representation of number's properties
+     * @param number long type
+     * @return string representation of number's properties
+     */
     public String getProperties(long number) {
         StringBuilder str = new StringBuilder();
         for (PropertiesOfNumbers c :PropertiesOfNumbers.values()) {
@@ -135,6 +196,12 @@ public class Logic {
         return str.deleteCharAt(str.length() - 1).toString();
     }
 
+
+    /**
+     * Check if there are mutually exclusive properties in the parameters
+     * @param properties list of properties
+     * @return empty string if there are no exclusive properties, otherwise returns exclusive properties
+     */
     public String mutuallyExclusive(ArrayList<String> properties) {
         for (PropertiesOfNumbers types : PropertiesOfNumbers.values()) {
             if (properties.contains(types.name()) && properties.contains(types.getOpposite())) {
@@ -160,6 +227,12 @@ public class Logic {
         return false;
     }
 
+    /**
+     * Checks if the numbers has all the needed properties
+     * @param number long type
+     * @param properties list of properties
+     * @return if the number has all properties
+     */
     public boolean containsProperties(long number, ArrayList<String> properties) {
         int count = properties.size();
         for (PropertiesOfNumbers c :PropertiesOfNumbers.values()) {
